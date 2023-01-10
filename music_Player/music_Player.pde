@@ -7,16 +7,37 @@ import ddf.minim.spi.*;
 import ddf.minim.ugens.*;
 //
 //Global Variables
+float appWidth, appHeight;
+float textX, textY;
+float forwardX, forwardY, forwardWidth, forwardHeight;
+PImage fastForward;
+color orange = #FF5F1F;
 Minim minim; //creates object to access all functions
 AudioPlayer song1; //creates "play list" variable holding extenstions WAV, AIFF, AU, SND, and MP3
 //
 void setup() {
   size(1200, 900);
+  appWidth = width;
+  appHeight = height;
   minim = new Minim(this); //load from data directory, loadFile should also load from project folder, like loadImage
   song1 = minim.loadFile("../FreeWare Music/MusicDownload/Little Samba - Quincas Moreira.mp3"); //able to pass absolute path, file name & extension, and URL
+  //population
+  textX = appWidth * 7/20;
+  textY = appHeight * 2/20;
+  forwardX = appWidth * 8.5/20;
+  forwardY = appHeight * 4/20;
+  forwardWidth = appWidth * 3/20;
+  forwardHeight = appHeight * 2/20;
+  fastForward = loadImage ("../images/fast forward.jpg");
 }//End setup
 //
 void draw() {
+  background(orange);
+  fill(0);
+  textSize(60);
+  text("Music Player", textX, textY);
+  rect(forwardX, forwardY, forwardWidth, forwardHeight);
+  image(fastForward, forwardX, forwardY, forwardWidth, forwardHeight);
 }//End draw
 //
 void keyPressed() {
