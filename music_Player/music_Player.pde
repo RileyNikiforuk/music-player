@@ -16,10 +16,13 @@ float infiniteLoopX, infiniteLoopY, infiniteLoopWidth, infiniteLoopHeight;
 float muteX, muteY, muteWidth, muteHeight;
 float playX, playY, playWidth, playHeight;
 float stopX, stopY, stopWidth, stopHeight;
+float playFireX, playFireY, playFireWidth, playFireHeight;
+float stopFireX, stopFireY, stopFireWidth, stopFireHeight;
 PImage fastForward, backwards, loop, infiniteLoop, mute, play, stop;
 color orange = #FF5F1F;
 Minim minim; //creates object to access all functions
 AudioPlayer song1; //creates "play list" variable holding extenstions WAV, AIFF, AU, SND, and MP3
+AudioPlayer song2;
 //
 void setup() {
   size(1200, 900);
@@ -27,6 +30,7 @@ void setup() {
   appHeight = height;
   minim = new Minim(this); //load from data directory, loadFile should also load from project folder, like loadImage
   song1 = minim.loadFile("../FreeWare Music/MusicDownload/Little Samba - Quincas Moreira.mp3"); //able to pass absolute path, file name & extension, and URL
+  song2 = minim.loadFile("../FreeWare Music/MusicDownload/Daytime Forest Bonfire.mp3");
   //population
   textX = appWidth * 7/20;
   textY = appHeight * 2/20;
@@ -65,6 +69,14 @@ void setup() {
   stopWidth = appWidth * 3/20;
   stopHeight = appHeight * 2/20;
   stop = loadImage ("../images/stop.png");
+  playFireX = appWidth * 4.5/20;
+  playFireY = appHeight * 7/20;
+  playFireWidth = appWidth * 3/20;
+  playFireHeight = appHeight * 2/20;
+  stopFireX = appWidth * 4.5/20;
+  stopFireY = appHeight * 10/20;
+  stopFireWidth = appWidth * 3/20;
+  stopFireHeight = appHeight * 2/20;
 }//End setup
 //
 void draw() {
@@ -86,6 +98,14 @@ void draw() {
   image(play, playX, playY, playWidth, playHeight);
   rect(stopX, stopY, stopWidth, stopHeight);
   image(stop, stopX, stopY, stopWidth, stopHeight);
+  fill(0, 255, 0);
+  rect(playFireX, playFireY, playFireWidth, playFireHeight);
+  fill(0);
+  text("Play Fire", playFireX, playFireY, playFireWidth, playFireHeight);
+  fill(255, 0, 0);
+  rect(stopFireX, stopFireY, stopFireWidth, stopFireHeight);
+  fill(0);
+  text("Stop Fire", stopFireX, stopFireY, stopFireWidth, stopFireHeight);
 }//End draw
 //
 void keyPressed() {
@@ -151,6 +171,24 @@ void mousePressed() {
       song1.rewind(); // Cue SONG to play from beginning
     } else {
       song1.rewind(); //Not playing means song is paused or song posistion is at the end
+    }
+  }
+  if ( mouseX > playFireX && mouseX < playFireX+playFireWidth && mouseY > playFireY && mouseY < playFireY+playFireHeight ) {
+    if ( song2.isPlaying() ) {
+      song2.pause();
+    } else if ( song2.position() >= song2.length()-song2.length()*1/5 ) {
+      song2.rewind();
+      song2.play();
+    } else {
+      song2.play();
+    }
+  }
+  if ( mouseX > stopFireX && mouseX < stopFireX+stopFireWidth && mouseY > stopFireY && mouseY < stopFireY+stopFireHeight ) {
+    if ( song2.isPlaying() ) {
+      song2.pause();
+      song2.rewind(); // Cue SONG to play from beginning
+    } else {
+      song2.rewind(); //Not playing means song is paused or song posistion is at the end
     }
   }
 }//End mousePressed
