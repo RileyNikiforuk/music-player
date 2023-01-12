@@ -18,7 +18,8 @@ float playX, playY, playWidth, playHeight;
 float stopX, stopY, stopWidth, stopHeight;
 float playFireX, playFireY, playFireWidth, playFireHeight;
 float stopFireX, stopFireY, stopFireWidth, stopFireHeight;
-PImage fastForward, backwards, loop, infiniteLoop, mute, play, stop;
+float backgroundX, backgroundY, backgroundWidth, backgroundHeight;
+PImage fastForward, backwards, loop, infiniteLoop, mute, play, stop, background;
 color orange = #FF5F1F;
 Minim minim; //creates object to access all functions
 AudioPlayer song1; //creates "play list" variable holding extenstions WAV, AIFF, AU, SND, and MP3
@@ -101,10 +102,12 @@ void draw() {
   fill(0, 255, 0);
   rect(playFireX, playFireY, playFireWidth, playFireHeight);
   fill(0);
+  textSize(40);
   text("Play Fire", playFireX, playFireY, playFireWidth, playFireHeight);
   fill(255, 0, 0);
   rect(stopFireX, stopFireY, stopFireWidth, stopFireHeight);
   fill(0);
+  textSize(40);
   text("Stop Fire", stopFireX, stopFireY, stopFireWidth, stopFireHeight);
 }//End draw
 //
