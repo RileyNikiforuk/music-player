@@ -20,7 +20,8 @@ float playFireX, playFireY, playFireWidth, playFireHeight;
 float stopFireX, stopFireY, stopFireWidth, stopFireHeight;
 float backgroundX, backgroundY, backgroundWidth, backgroundHeight;
 PImage fastForward, backwards, loop, infiniteLoop, mute, play, stop, background;
-color orange = #FF5F1F;
+boolean nightMode=false;
+color orange = #FF5F1F, nightModeOrange = #FF5F00;
 Minim minim; //creates object to access all functions
 AudioPlayer song1; //creates "play list" variable holding extenstions WAV, AIFF, AU, SND, and MP3
 AudioPlayer song2;
@@ -81,7 +82,12 @@ void setup() {
 }//End setup
 //
 void draw() {
-  background(orange);
+  //background(orange);
+  if (nightMode==true) {
+    background(nightModeOrange);
+  } else {
+    background(orange);
+  }
   fill(0);
   textSize(60);
   text("Music Player", textX, textY);
@@ -112,37 +118,13 @@ void draw() {
 }//End draw
 //
 void keyPressed() {
-  //if ( key=='P' || key=='p' ) song1.play(); //Parameter is milli-seconds from start of audio file to start playing (illustrate with examples)
-  //if ( key=='P' || key=='p' ) { //Play Pause stop Button
-    //if ( song1.isPlaying() ) {
-      //song1.pause();
-    //} else if ( song1.position() >= song1.length()-song1.length()*1/5 ) {
-      //song1.rewind();
-      //song1.play();
-    //} else {
-      //song1.play();
-    //}
-  //}//End play pause stop button
-  //int loopNum = 2; //local variable plays once loops twice
-  //if ( key=='L' || key=='l' ) song1.loop(loopNum);
-  //if ( key=='I' || key=='i' ) song1.loop(-1); // parameter is for infinite loops
-  //if ( key=='F' || key=='f' ) song1.skip(1000); //skip forward 1 second (1000 milliseconds)
-  //if ( key=='R' || key=='r' ) song1.skip(-1000); //skip backwards 1 second, notice negative, (1000 milliseconds)
-  /*if ( key=='M' || key=='m' ) {//MUTE Button
-    if ( song1.isMuted() ) {
-      song1.unmute();
+  if (key == 'N' || key == 'n') {
+    if (nightMode==false) {
+      nightMode=true;
     } else {
-      song1.mute();
+      nightMode=false;
     }
-  }//End MUTE Button*/
-  //if ( key=='S' || key=='s' ) {//STOP Button
-    //if ( song1.isPlaying() ) {
-      //song1.pause();
-      //song1.rewind(); // Cue SONG to play from beginning
-    //} else {
-      //song1.rewind(); //Not playing means song is paused or song posistion is at the end
-    //}
-  //}//End STOP Button
+  }
 }//End keyPressed
 //
 void mousePressed() {
